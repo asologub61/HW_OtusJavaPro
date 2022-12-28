@@ -1,5 +1,7 @@
 # HW_OtusJavaPro
-Домашние работы к курсу OTUS "Java Professional"
+# Домашние работы к курсу OTUS "Java Professional"
 
-Студент:
+Группа 2022-12
+
+# Студент:
 Сологуб Андрей
