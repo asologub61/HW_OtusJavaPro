@@ -1,0 +1,4 @@
+rootProject.name = 'OtusJava'
+include 'L01-gradle'
+include 'hw01-gradle'
+
