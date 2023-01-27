@@ -23,6 +23,7 @@ allprojects {
         }
     }
 
+
     configurations.configureEach {
         resolutionStrategy {
             failOnVersionConflict()
@@ -38,6 +39,8 @@ allprojects {
             force("com.google.errorprone:error_prone_annotations:2.7.1")
         }
     }
+=======
+
 }
 
 //./gradlew -q managedVersions
