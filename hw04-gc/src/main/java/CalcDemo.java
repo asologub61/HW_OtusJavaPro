@@ -12,12 +12,12 @@ import java.time.LocalDateTime;
 
 public class CalcDemo {
     public static void main(String[] args) {
-        long counter = 100_000_000;
-        var summator = new Summator();
+        int counter = 100_000_000;
+        Summator summator = new Summator();
         long startTime = System.currentTimeMillis();
 
-        for (var idx = 0; idx < counter; idx++) {
-            var data = new Data(idx);
+        for (int idx = 0; idx < counter; idx++) {
+            Data data = new Data(idx);
             summator.calc(data);
 
             if (idx % 10_000_000 == 0) {
