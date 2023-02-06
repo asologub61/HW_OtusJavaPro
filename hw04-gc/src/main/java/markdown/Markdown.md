@@ -24,7 +24,7 @@
 | 1024 mb          |               Z GC                |       spend msec:18707, sec:18        |
 | 2048 mb          |               Z GC                |       spend msec:18129, sec:18        |
 
- Here we can see that more likely choice is **_512mb Z GC_**
+ Here we can see that more likely choice is **_1024mb Z GC_**
 
 ## Table 2. After optimization.
 
