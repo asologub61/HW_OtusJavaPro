@@ -1,8 +1,8 @@
-package Tests;
+package tests;
 
-import Annotations.After;
-import Annotations.Before;
-import Annotations.Test;
+import annotations.After;
+import annotations.Before;
+import annotations.Test;
 
 public class TestClass {
 
