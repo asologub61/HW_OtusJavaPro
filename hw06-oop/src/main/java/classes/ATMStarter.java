@@ -7,19 +7,7 @@ import java.util.TreeMap;
 
 public class ATMStarter implements ATM {
 
-    private final Map<Integer, BanknotesContainer> allBanknotesContainer = new TreeMap<>(new Comparator<Integer>() {
-        @Override
-        public int compare(Integer o1, Integer o2) {
-            if (o1 > o2) {
-                return 1;
-            } else if (o1 < o2) {
-                return -1;
-            } else {
-                return 0;
-            }
-        }
-    });
-
+    private final Map<Integer, BanknotesContainer> allBanknotesContainer = new TreeMap<>(Integer::compareTo);
 
     @Override
     public void putBanknotesContainer(BanknotesContainer banknotesContainer) {
@@ -45,7 +33,12 @@ public class ATMStarter implements ATM {
             if (sum % nominal == 0) {
                 neededBanknotes = sum / nominal;
                 if (isBanknotesContainerHaveBanknotes(nominal, neededBanknotes)) {
-                    allBanknotesContainer.get(nominal).removeBanknotes(neededBanknotes);
+                    try {
+                        allBanknotesContainer.get(nominal).removeBanknotes(neededBanknotes);
+                    }catch (RuntimeException e){
+                        System.err.println(e.getMessage());
+                        allBanknotesContainer.get(nominal).addBanknotes(neededBanknotes);
+                    }
                     System.out.println("Выдано " + sum);
                     return;
                 }
@@ -64,7 +57,7 @@ public class ATMStarter implements ATM {
     }
 
     @Override
-    public String getStatisticForTests() {
+    public String getStatisticForATM() {
         StringBuilder statisticLine = new StringBuilder();
         statisticLine.append("В банкомате осталось:\n");
         for (BanknotesContainer banknotesContainer : allBanknotesContainer.values()) {
@@ -85,11 +78,6 @@ public class ATMStarter implements ATM {
         Map<Integer, Integer> statistic = new HashMap<>();
         allBanknotesContainer.forEach((k, v) -> statistic.put(v.getNominalOfBanknotes(), v.getCountBanknotesInContainer()));
         return statistic;
-    }
-
-    public void printBalance() {
-
-        System.out.println("Баланс счета: " + getBalance());
     }
 }
 

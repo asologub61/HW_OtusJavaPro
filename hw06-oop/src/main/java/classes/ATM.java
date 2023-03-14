@@ -1,8 +1,5 @@
 package classes;
 
-import classes.Banknotes;
-import classes.BanknotesContainer;
-
 import java.util.Map;
 
 public interface ATM {
@@ -15,7 +12,7 @@ public interface ATM {
 
     public int getBalance();
 
-    public String getStatisticForTests();
+    public String getStatisticForATM();
 
     public Map<Integer, Integer> getStatisticForBanknotes();
 }

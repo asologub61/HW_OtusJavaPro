@@ -23,7 +23,7 @@ public class TestsATMStarter {
         Assertions.assertEquals("В банкомате осталось:\n" +
                         "3 банкнот с номиналом 50\n" +
                         "Доступный баланс: 150",
-                atm.getStatisticForTests());
+                atm.getStatisticForATM());
     }
 
     @Test
@@ -35,7 +35,7 @@ public class TestsATMStarter {
                         "3 банкнот с номиналом 50\n" +
                         "2 банкнот с номиналом 200\n" +
                         "Доступный баланс: 550",
-                atm.getStatisticForTests());
+                atm.getStatisticForATM());
     }
 
     @Test
@@ -52,7 +52,7 @@ public class TestsATMStarter {
     public void testPutEmptyBanknotesContainer() {
         Assertions.assertEquals("В банкомате осталось:\n" +
                         "Доступный баланс: 0",
-                atm.getStatisticForTests());
+                atm.getStatisticForATM());
     }
 
     @Test
@@ -63,7 +63,7 @@ public class TestsATMStarter {
         atm.removeBanknotesContainer(Banknotes.N1000);
         Assertions.assertEquals("В банкомате осталось:\n" +
                 "10 банкнот с номиналом 500\n" +
-                "Доступный баланс: 5000", atm.getStatisticForTests());
+                "Доступный баланс: 5000", atm.getStatisticForATM());
     }
 
     @Test
@@ -81,7 +81,7 @@ public class TestsATMStarter {
         atm.getMoneySum(1000);
         Assertions.assertEquals("В банкомате осталось:\n" +
                 "5 банкнот с номиналом 200\n" +
-                "Доступный баланс: 1000", atm.getStatisticForTests());
+                "Доступный баланс: 1000", atm.getStatisticForATM());
     }
 
     @Test
