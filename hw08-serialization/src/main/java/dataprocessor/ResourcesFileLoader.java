@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import model.Measurement;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 
@@ -18,15 +19,13 @@ public class ResourcesFileLoader implements Loader {
     }
 
     @Override
-    public List<Measurement> load() {
+    public List<Measurement> load() throws IOException {
         //читает файл, парсит и возвращает результат
-        try {
-            var inputStream = getClass().getClassLoader().getResourceAsStream(name);
+        try(var inputStream = getClass().getClassLoader().getResourceAsStream(name)) {
+
             var reader = new BufferedReader(new InputStreamReader(inputStream));
             return new Gson().fromJson(reader, new TypeToken<List<Measurement>>() {
             }.getType());
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e);
         }
     }
 }

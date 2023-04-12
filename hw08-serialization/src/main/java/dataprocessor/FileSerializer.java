@@ -21,7 +21,7 @@ public class FileSerializer implements Serializer {
         try {
             Files.writeString(Paths.get(name), gson);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new FileProcessException(e);
         }
 
         //формирует результирующий json и сохраняет его в файл
