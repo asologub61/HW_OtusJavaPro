@@ -19,13 +19,16 @@ public class ResourcesFileLoader implements Loader {
     }
 
     @Override
-    public List<Measurement> load() throws IOException {
+    public List<Measurement> load() {
         //читает файл, парсит и возвращает результат
-        try(var inputStream = getClass().getClassLoader().getResourceAsStream(name)) {
+        try (var inputStream = getClass().getClassLoader().getResourceAsStream(name)) {
 
             var reader = new BufferedReader(new InputStreamReader(inputStream));
             return new Gson().fromJson(reader, new TypeToken<List<Measurement>>() {
             }.getType());
+        } catch (IOException e) {
+            new RuntimeException(e);
         }
+        return null;
     }
 }
