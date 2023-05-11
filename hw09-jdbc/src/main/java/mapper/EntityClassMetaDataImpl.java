@@ -9,52 +9,63 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class EntityClassMetaDataImpl<T> implements EntityClassMetaData {
-    private final Class<T> entityClass;
+public class EntityClassMetaDataImpl implements EntityClassMetaData {
+    private final String name;
+    private final Constructor constructor;
+    private final List<Field> allFields;
 
+    private Field fieldWithId;
 
-    public EntityClassMetaDataImpl(Class<T> entityClass) {
-        this.entityClass = entityClass;
+    private List<Field> fieldListWithoutId;
+
+    public EntityClassMetaDataImpl(Class entityClass)  {
+        this.name = entityClass.getSimpleName();
+        try {
+            this.constructor = entityClass.getConstructor();
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
+        this.allFields = Arrays.asList(entityClass.getDeclaredFields());
+        this.fieldListWithoutId = new ArrayList<>();
+
+        for (Field field : entityClass.getDeclaredFields()) {
+            if (field.isAnnotationPresent(Id.class)) {
+                this.fieldWithId = field;
+            }
+        }
+
+        for (Field field : entityClass.getDeclaredFields()) {
+            if ((field.isAnnotationPresent(Id.class) == false)) {
+                fieldListWithoutId.add(field);
+            }
+        }
     }
 
 
     @Override
     public String getName() {
-        return entityClass.getSimpleName();
+        return name;
     }
 
     @Override
-    public Constructor getConstructor(){
-         try {
-            return entityClass.getConstructor();
-        } catch (NoSuchMethodException e) {
-            throw new RuntimeException(e);
-        }
+    public Constructor getConstructor() {
+        return constructor;
     }
+
 
     @Override
     public Field getIdField() {
-        for (Field field : entityClass.getDeclaredFields()) {
-            if (field.isAnnotationPresent(Id.class)) {
-                return field;
-            }
-        }
-        throw new RuntimeException();
+        return fieldWithId;
     }
 
     @Override
     public List<Field> getAllFields() {
-        return Arrays.asList(entityClass.getDeclaredFields());
+        return allFields;
     }
 
     @Override
     public List<Field> getFieldsWithoutId() {
-        List<Field> fieldList = new ArrayList<>();
-        for (Field field : entityClass.getDeclaredFields()) {
-            if (field.isAnnotationPresent(Id.class) == false) {
-                fieldList.add(field);
-            }
-        }
-        return fieldList;
+
+        return fieldListWithoutId;
     }
 }

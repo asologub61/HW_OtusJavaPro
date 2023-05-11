@@ -1,6 +1,7 @@
 package mapper;
 
 import repository.DataTemplate;
+import repository.DataTemplateException;
 import repository.executor.DbExecutor;
 
 
@@ -45,7 +46,7 @@ public class DataTemplateJdbc<T> implements DataTemplate<T> {
                 throw new RuntimeException("Objects not found");
             } catch (SQLException | NoSuchMethodException | InstantiationException | IllegalAccessException |
                      InvocationTargetException e) {
-                throw new RuntimeException();
+                throw new DataTemplateException(e);
             }
         });
     }
@@ -68,7 +69,7 @@ public class DataTemplateJdbc<T> implements DataTemplate<T> {
                 return clientList;
             } catch (SQLException | InstantiationException | IllegalAccessException | NoSuchMethodException |
                      InvocationTargetException e) {
-                throw new RuntimeException(e);
+                throw new DataTemplateException(e);
             }
         }).orElseThrow(() -> new RuntimeException());
     }
