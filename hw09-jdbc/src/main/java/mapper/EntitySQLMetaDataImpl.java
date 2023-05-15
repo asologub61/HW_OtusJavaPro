@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 
 import static java.lang.String.format;
 
-public class EntitySQLMetaDataImpl<T> implements EntitySQLMetaData{
-    private EntityClassMetaData<T> entityClassMetaDataClient;
+public class EntitySQLMetaDataImpl implements EntitySQLMetaData{
+    private EntityClassMetaData<?> entityClassMetaDataClient;
     private String fieldList;
 
     private String fieldListWithoutId;
@@ -15,7 +15,7 @@ public class EntitySQLMetaDataImpl<T> implements EntitySQLMetaData{
     private static final String SELECT_BY_ID = "SELECT %s FROM %s WHERE %s = ?";
     private static final String INSERT = "INSERT INTO %s (%s) VALUES (%s)";
     private static final String UPDATE = "UPDATE %s SET %s WHERE %s = ?";
-    public EntitySQLMetaDataImpl(EntityClassMetaData<T> entityClassMetaDataClient) {
+    public EntitySQLMetaDataImpl(EntityClassMetaData<?> entityClassMetaDataClient) {
 
 
 

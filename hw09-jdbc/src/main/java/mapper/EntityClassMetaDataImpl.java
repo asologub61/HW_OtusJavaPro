@@ -9,16 +9,16 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class EntityClassMetaDataImpl implements EntityClassMetaData {
+public class EntityClassMetaDataImpl<T> implements EntityClassMetaData<T> {
     private final String name;
-    private final Constructor constructor;
+    private final Constructor<T> constructor;
     private final List<Field> allFields;
 
     private Field fieldWithId;
 
     private List<Field> fieldListWithoutId;
 
-    public EntityClassMetaDataImpl(Class entityClass)  {
+    public EntityClassMetaDataImpl(Class<T> entityClass)  {
         this.name = entityClass.getSimpleName();
         try {
             this.constructor = entityClass.getConstructor();
